@@ -3,6 +3,8 @@ package org.apache.commons.io;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class VectorSpace {
 	
@@ -10,19 +12,77 @@ public class VectorSpace {
 	
 	public static void main(String[] args) {
 		
+		ArrayList<Document> docList = new ArrayList<Document>();
+		HashMap<Integer, String> uniqueWordMap = new HashMap<Integer, String>();
+		
 		try{
-			File yelp = new File("yelp_reviews"); //imports yelp file
+			File yelp = new File("yelp_reviews.txt"); //imports yelp file
 			Scanner scan = new Scanner(yelp); //scans file
+			
 			
 			HashMap<Integer,Integer> review_to_rating = new HashMap<Integer,Integer>();
 			HashMap<String,Integer> word_to_id = new HashMap<String,Integer>(); //this map will assign an integer index to each word type in the entire corpus.
 			HashMap<Integer,Integer> wordindex_to_count = new HashMap<Integer,Integer>(); //this map will assign to the word index w_i(w) of word w the total count of the word type w in the corpus
+			int wordListCounter = 0;
+			
+			while(scan.hasNextLine())
+			{
+				HashMap<String, Integer> wordFreq = new HashMap<String, Integer>();
+				String line = scan.nextLine();
+				/**Example Match: ($*$*$*$*$ 9142 5)**/
+				Matcher r = Pattern.compile("(?:\\$\\*?)+(\\s\\d+)(\\s\\d{1,5})").matcher(line);
+				
+				if(r.matches()){
+				
+					int id = Integer.parseInt(r.group(1).trim());
+				    int rating = Integer.parseInt(r.group(2).trim());
+				    	
+				   // System.out.println(id + ": " + rating);
+				    			    
+				    //Read next line of input as this contains the actually review
+				    String review = scan.nextLine();
+				    Matcher wordMatcher = Pattern.compile("([a-zA-Z]+[^\\s'])").matcher(review);
+				    
+				    while(wordMatcher.find())
+				    {
+					    int wordList = wordMatcher.groupCount();
+					    for(int i = 0; i < wordList; i++){
+					    	String word = wordMatcher.group(i);
+					    	
+					    	//if HashMap already contains word update count; otherwise add it
+					    	if(wordFreq.containsKey(word)){
+					    		int count = wordFreq.get(word);
+					    		wordFreq.put(word, ++count);
+					    	}
+					    	else{
+					    		wordFreq.put(word, 1);
+					    	}
+					    	
+					    	if(!uniqueWordMap.containsValue(word)){   		
+					    		uniqueWordMap.put(++wordListCounter, word);
+					    	}
+					    } 
+				    } 
+				    
+				    Document doc = new Document(id, rating, wordFreq);				    
+				    docList.add(doc);
+				    
+				    // Debugging purpose only
+				  /*  for(String key : wordFreq.keySet()){
+				    	System.out.println(key + ": " + wordFreq.get(key));
+				    }*/
+				}
+			}
+					
+		//	System.out.println(docList.size());
+			/*
 			int n = 1; //n remembers the largest assigned index to any word
 			String w = ""; //word
 			int nwt; // total number of distinct word types in the corpus
 			int nr; //total number of reviews in the corpus
 			int count = 0;
 			ArrayList<Integer> wordid = new ArrayList<Integer>();
+			
 			while(scan.hasNextLine()){
 				String line=scan.next(); //scans for divider; not important
 				int id=Integer.parseInt(scan.next()); //review ID
@@ -69,7 +129,7 @@ public class VectorSpace {
 				/*List <String> reviews = FileUtils.readLines(yelp, "UTF-8");
 				for(String yelprev: reviews){
 					System.out.println(yelprev);
-				}*/
+				}
 				
 				//String review2 = scan.next();
 				//System.out.println(id);
@@ -78,9 +138,9 @@ public class VectorSpace {
 				//String something = Arrays.toString(rev);
 
 				
-			}
+			}*/
 			
-			System.out.println(review_to_rating);
+		//	System.out.println(review_to_rating);
 			
 			//System.out.println(rev);
 			//System.out.println(rawr);
