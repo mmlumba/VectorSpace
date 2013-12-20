@@ -16,7 +16,7 @@ public class VectorSpace {
 		PrintWriter matrixFileWriter = null;
 		
 		try {
-			File timeline = new File("paramore_love_2013_12_07.txt"); //document input
+			File timeline = new File("paramore_happy_2013_12_08.txt"); //document input
 			Scanner scan = new Scanner(timeline); //scanner from file
 			//HashMap<String,Integer> word_to_id = new HashMap<String,Integer>(); //this map will assign an integer index to each word type in the entire corpus.
             //HashMap<Integer,Integer> wordindex_to_count = new HashMap<Integer,Integer>(); //this map will assign to the word index w_i(w) of word w the total count of the word type w in the corpus
