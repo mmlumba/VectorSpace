@@ -16,7 +16,9 @@ public class VectorSpace {
 	
 	public static void main(String[] args) {
 		
-		File doc1 = new File("C:\\Users\\Marian\\Dropbox\\TwitterAPI\\2014tour\\paramore_australia_2014_01_02.txt");
+		File doc = new File("C:\\Users\\Marian\\Dropbox\\TwitterAPI\\q1sydney\\");
+		
+		/*File doc1 = new File("C:\\Users\\Marian\\Dropbox\\TwitterAPI\\2014tour\\paramore_australia_2014_01_02.txt");
 		
 		File doc2 = new File("C:\\Users\\Marian\\Dropbox\\TwitterAPI\\2014tour\\paramorefb_australia_2014_01_02.txt");
 		
@@ -24,19 +26,18 @@ public class VectorSpace {
 		
 		File doc4 = new File("C:\\Users\\Marian\\Dropbox\\TwitterAPI\\2014tour\\tayloryorkyall_australia_2014_01_02.txt");
 		
-		File doc5 = new File("C:\\Users\\Marian\\Dropbox\\TwitterAPI\\2014tour\\yelyahwilliams_australia_2014_01_02.txt");
+		File doc5 = new File("C:\\Users\\Marian\\Dropbox\\TwitterAPI\\2014tour\\yelyahwilliams_australia_2014_01_02.txt");*/
 		
 		
-		//File[] documents = doc1.listFiles(); //Method that lists all the files within a given directory
+		File[] documents = doc.listFiles(); //Method that lists all the files within a given directory
 		
-		File[] documents = {doc1, doc2, doc3, doc4, doc5}; //Static array that lists all files separately
+		//File[] documents = {doc1, doc2, doc3, doc4, doc5}; //Static array that lists all files separately
 		
 		try {
 			generateWordSet(documents);
 			generateMatrixTable(documents);
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -47,25 +48,33 @@ public class VectorSpace {
 		printOutMatrix();
 	}
 
-	private static void printOutMatrix() {
-		
+	
+
+	private static void printOutMatrix() throws FileNotFoundException {
+		PrintWriter printStuff = new PrintWriter("moutput.txt");
 		for(String word : wordSet){
-			//System.out.print(word + ": " );
+			printStuff.print(word + ": " ); //this is the word
 			Set<Integer> keys = documentMapSet.keySet(); //gets the ID for the document
 			for(Integer key : keys){ //gets the word "key" within the set "keys"
 				if(documentMapSet.get(key).containsKey(word)){
-					System.out.print(documentMapSet.get(key).get(word)); //if document has word print out its frequency
+					printStuff.print(documentMapSet.get(key).get(word)); //if document has word print out its frequency
 				}
 				else{
-					System.out.print("0"); //else print 0
+					printStuff.print("0"); //else print 0
 				}
-				System.out.print(" ");
+				printStuff.print(" ");
 				
 			
 			}
-			System.out.println(); //prints matrix
+			printStuff.println(); //prints matrix
+			
 		}
+		//print.println();
+		printStuff.close();
 	}
+	//static File moutput = new File("moutput.txt");
+
+	
 
 	private static void generateDocumentWordMap(File[] documents)
 			throws FileNotFoundException, IOException {
@@ -123,7 +132,6 @@ public class VectorSpace {
 	}
 
 	private static void generateWordSet(File[] documents) throws IOException  { //creates wordset
-		// TODO Auto-generated method stub
 		//goes through each document and aggregates a wordset from all documents
 		for(File doc : documents){//populates from documents
 			
