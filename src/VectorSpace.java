@@ -1,11 +1,7 @@
-//import Jama.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.io.*;
-import java.nio.file.Files;
-
-import org.apache.commons.io.FileUtils;
 
 public class VectorSpace {
 
@@ -54,7 +50,7 @@ public class VectorSpace {
 	private static void printOutMatrix() {
 		
 		for(String word : wordSet){
-			System.out.print(word + ": " );
+			//System.out.print(word + ": " );
 			Set<Integer> keys = documentMapSet.keySet(); //gets the ID for the document
 			for(Integer key : keys){ //gets the word "key" within the set "keys"
 				if(documentMapSet.get(key).containsKey(word)){
@@ -63,7 +59,7 @@ public class VectorSpace {
 				else{
 					System.out.print("0"); //else print 0
 				}
-				System.out.print("|");
+				System.out.print(" ");
 				
 			
 			}

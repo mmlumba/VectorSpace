@@ -76,7 +76,7 @@ public class VectorSpace_B {
 				matrixFileWriter.println();
 			}
             
-            
+            matrixFileWriter.close();
 		}
 		//catch (FileNotFoundException fnfe){fnfe.printStackTrace();}
 		catch (Exception e){e.printStackTrace();}
