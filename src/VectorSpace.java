@@ -51,7 +51,8 @@ public class VectorSpace {
 	
 
 	private static void printOutMatrix() throws FileNotFoundException {
-		PrintWriter printStuff = new PrintWriter("moutput.txt");
+		File outputsDir = new File("C:\\Users\\Marian\\Dropbox\\VectorSpace\\outputs");
+		PrintWriter printStuff = new PrintWriter(outputsDir+"\\moutput.txt");
 		for(String word : wordSet){
 			printStuff.print(word + ": " ); //this is the word
 			Set<Integer> keys = documentMapSet.keySet(); //gets the ID for the document
@@ -145,7 +146,7 @@ public class VectorSpace {
 			}
 			finally{
 				reader.close();
-				//System.out.println(wordSet.size() + " Total list");
+				System.out.println(wordSet.size() + " Total list");
 			}		
 		
 		}		
