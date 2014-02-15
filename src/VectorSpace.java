@@ -16,7 +16,7 @@ public class VectorSpace {
 	
 	public static void main(String[] args) {
 		
-		File doc = new File("C:\\Users\\Marian\\Dropbox\\TwitterAPI\\q1sydney\\");
+		File doc = new File("C:\\Users\\Marian\\Dropbox\\TwitterAPI\\q3monumentour\\");
 		
 		/*File doc1 = new File("C:\\Users\\Marian\\Dropbox\\TwitterAPI\\2014tour\\paramore_australia_2014_01_02.txt");
 		
@@ -31,7 +31,7 @@ public class VectorSpace {
 		
 		File[] documents = doc.listFiles(); //Method that lists all the files within a given directory
 		
-		//File[] documents = {doc1, doc2, doc3, doc4, doc5}; //Static array that lists all files separately
+		//File[] documents = {doc}; //Static array that lists all files separately
 		
 		try {
 			generateWordSet(documents);
@@ -52,7 +52,7 @@ public class VectorSpace {
 
 	private static void printOutMatrix() throws FileNotFoundException {
 		File outputsDir = new File("C:\\Users\\Marian\\Dropbox\\VectorSpace\\outputs");
-		PrintWriter printStuff = new PrintWriter(outputsDir+"\\moutput.txt");
+		PrintWriter printStuff = new PrintWriter(outputsDir+"\\q3output_3.txt");
 		for(String word : wordSet){
 			printStuff.print(word + ": " ); //this is the word
 			Set<Integer> keys = documentMapSet.keySet(); //gets the ID for the document

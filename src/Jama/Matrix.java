@@ -1,13 +1,18 @@
 package Jama;
 
-public class Matrix {
+
+	public Matrix(double[][] array) {
+		public static void main(String[] args) {
+			double[][] array = {{2., 1., 8., 1., 0., 2., 1., 1., 0., 0., 2., 16.},{0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0.},{1., 0., 6., 0., 2., 0., 2., 0., 1., 0., 0., 1.},{0., 0., 2., 0., 0., 0., 0., 0., 0., 0., 0., 0.}};
+			Matrix A = new Matrix(array);
+			System.out.println(A);
+
+		}
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	
 
-	}
-
-}
